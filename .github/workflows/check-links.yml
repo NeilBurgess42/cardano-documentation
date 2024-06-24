@@ -1,0 +1,16 @@
+name: Check broken links
+on:
+  schedule:
+    - cron: '0 12 * * *'
+
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+      - name: Install dependencies
+        run: yarn global add broken-link-checker
+      - name: Check Links
+        run: blc https://docs.cardano.org -ro
